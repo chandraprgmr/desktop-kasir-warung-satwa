@@ -111,7 +111,7 @@ export default{
       };
   },
   data(){return{
-    searchField: ['tgl', 'keterangan', 'total'],
+    searchField: ['satuan'],
     searchValue: '',
 	listProduk:[],
 	mode: 'Edit',
