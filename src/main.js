@@ -7,7 +7,6 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from "./routers"
 import smalltalk from 'smalltalk'
-import {ClientTable} from 'v-tables-3'
 import Vue3EasyDataTable from 'vue3-easy-data-table';
 import 'vue3-easy-data-table/dist/style.css';
 
@@ -28,7 +27,6 @@ const myGlobalVariables = {
 
 createApp(App)
 	.use(router)
-	.use(ClientTable, {}, 'bootstrap3')
 	.component('EasyDataTable', Vue3EasyDataTable)
 	.provide('smalltalk', smalltalk)
 	.mixin(myGlobalVariables)

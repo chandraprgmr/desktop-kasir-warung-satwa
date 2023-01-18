@@ -7,7 +7,7 @@ module.exports = defineConfig({
   pluginOptions: {
     electronBuilder: {
       preload: 'public/preload.js',
-      outputDir: 'build',
+      outputDir: 'dist',
       builderOptions: {
           productName: "Kasir Warung Satwa",
           appId: 'com.warung-satwa.kasir',
