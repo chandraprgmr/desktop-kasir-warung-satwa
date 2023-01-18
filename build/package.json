@@ -1,0 +1,70 @@
+{
+  "name": "warung-satwa-kasir-app",
+  "version": "1.0.0",
+  "private": true,
+  "author": "chandprgmr",
+  "license": "MIT",
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint",
+    "electron:build": "vue-cli-service electron:build",
+    "electron:serve": "vue-cli-service electron:serve",
+    "postinstall": "electron-builder install-app-deps",
+    "postuninstall": "electron-builder install-app-deps"
+  },
+  "main": "background.js",
+  "dependencies": {
+    "@vuepic/vue-datepicker": "^3.6.1",
+    "bcryptjs": "^2.4.3",
+    "cardinal": "^2.1.1",
+    "core-js": "^3.8.3",
+    "datatables.net-vue3": "^2.0.0",
+    "electron-unhandled": "^4.0.1",
+    "jquery": "^3.6.3",
+    "mysql2": "^2.3.3",
+    "smalltalk": "^4.1.1",
+    "v-tables-3": "^0.4.7",
+    "vue": "^3.2.13",
+    "vue-router": "^4.0.13",
+    "vue-toastification": "^2.0.0-rc.5",
+    "vue3-easy-data-table": "^1.5.26",
+    "vue3-table-lite": "^1.3.1",
+    "vuetable-2": "^2.0.0-beta.4"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.16",
+    "@babel/eslint-parser": "^7.12.16",
+    "@vue/cli-plugin-babel": "~5.0.0",
+    "@vue/cli-plugin-eslint": "~5.0.0",
+    "@vue/cli-service": "~5.0.0",
+    "electron": "^13.0.0",
+    "electron-devtools-installer": "^3.1.0",
+    "eslint": "^7.32.0",
+    "eslint-plugin-vue": "^8.0.3",
+    "vue-cli-plugin-electron-builder": "~2.1.1"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/vue3-essential",
+      "eslint:recommended"
+    ],
+    "parserOptions": {
+      "parser": "@babel/eslint-parser"
+    },
+    "rules": {
+      "vue/no-deprecated-slot-attribute": "off",
+      "vue/no-deprecated-slot-scope-attribute": "off"
+    }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead",
+    "not ie 11"
+  ]
+}

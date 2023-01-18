@@ -1,0 +1,57 @@
+/*20221130*/
+.my-login{
+	margin-top: 10rem!important;
+	margin-bottom: 3rem!important;
+}
+
+/*20221206*/
+table > thead > tr > th {
+	text-align: center!important;
+}
+.totalHarga{
+	font-size: 2.5em; 
+	font-weight: 700; 
+	color: #f6c23e;
+}
+.sidebar-dark .nav-item .nav-link {
+    color: rgba(255,255,255,.8);
+}
+.sidebar-dark .nav-item.active {
+    background-color: #ffcf56;
+}
+
+/*20221214*/
+/*.dataTables_filter {*/
+/*#searchBox{	
+	display: none;
+}*/
+
+/*20221219*/
+#cv-autocomplete{
+	position: absolute; 
+	z-index: 1;
+	width: 100%;
+}
+
+#cv-autocomplete :hover{
+	cursor: default;
+}
+
+#cv-autocomplete ul{
+	list-style-type: none;
+	padding-left: 0;
+}
+
+#cv-autocomplete li{
+	padding-left: 12px;
+	background-color: #e1e1e1;
+}
+
+#cv-autocomplete li:hover{
+	background-color: #c4c4c4;
+}
+
+/*20221228*/
+.buttonsToHide{
+	display: none;
+}
