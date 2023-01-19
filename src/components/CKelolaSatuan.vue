@@ -12,17 +12,6 @@
 		<div class="col-md-12">
 			<div class="card">
 				<div class="card-body">
-					<!-- <table class="table table-striped" id="myTable">
-                        <thead>
-                            <tr>
-                              <th>Satuan</th>
-                              <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <CKelolaSatuanRow v-bind:listProduk="listProduk" v-on:konfirmasiHapus="konfirmasiHapus" v-on:editProduk="editProduk" />
-                        </tbody>
-                    </table> -->
           <EasyDataTable
             header-text-direction="center"
             :headers="headers"
@@ -92,14 +81,9 @@
     </div>
 </template>
 <script>
-// import CKelolaSatuanRow from './CKelolaSatuanRow.vue'
-
 export default{
 	name: 'CKelolaSatuan',
   inject: ['smalltalk'],
-	// components : {
-  //       CKelolaSatuanRow,
-  //   },
   setup() {
       const headers = [
         { text: "Satuan", value: "satuan", sortable: true  },

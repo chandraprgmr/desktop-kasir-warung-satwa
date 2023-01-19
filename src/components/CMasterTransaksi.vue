@@ -18,20 +18,6 @@
 		<div class="col-md-12" style="height: 425px; overflow: auto;">
 			<div class="card">
 				<div class="card-body">
-					<!-- <table class="table table-striped" id="myTable">
-                        <thead>
-                            <tr>
-                              <th>Tgl Transaksi</th>
-                              <th>Partisipan</th>
-                              <th>Pengeluaran (Rp.)</th>
-                              <th>Pemasukan (Rp.)</th>
-                              <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <CMasterTransaksiRow v-bind:listProduk="listProduk" v-on:konfirmasiHapus="konfirmasiHapus" v-on:editProduk="editProduk" />  
-                        </tbody>
-                    </table> -->
                     <EasyDataTable
                         header-text-direction="center"
                         :headers="headers"
@@ -146,22 +132,21 @@
     </div>
 </template>
 <script>
-// import CMasterTransaksiRow from './CMasterTransaksiRow.vue'
 import Datepicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
 import { ref, onMounted } from 'vue';
+import { saveAs } from 'file-saver'
 
 export default{
 	name: 'CMasterTransaksi',
     inject: ['smalltalk'],
 	components : {
-        // CMasterTransaksiRow,
         Datepicker 
     },
     data(){return{
         searchField: ['nama'],
         searchValue: '',
-	listProduk:[],
+        listProduk:[],
 	mode: 'Edit',
 	namaBarang: '',
 	kode: '',
@@ -239,7 +224,6 @@ export default{
                         this.listProduk = arrayTemp
                         this.pemasukan = totalPemasukan
                         this.pengeluaran = totalPengeluaran
-                        console.log(this.listProduk)
                     }else{
                         this.smalltalk.alert('DB FAIL', result)
                     }
@@ -254,8 +238,41 @@ export default{
         }
     },
     methods : {
-        downloadExcel: function(){
-            document.getElementById("dtExcel").click()
+        async downloadExcel() {
+            const ExcelJS = require('exceljs')
+            const workbook = new ExcelJS.Workbook()
+            workbook.creator = 'Kasir Warung Satwa'
+
+            let d1 = new Date(this.date[0])
+            let d2 = new Date(this.date[1])
+            let df1 = d1.getDate()+' '+this.monthNames[d1.getMonth()]+' '+d1.getFullYear()
+            let df2 = d2.getDate()+' '+this.monthNames[d2.getMonth()]+' '+d2.getFullYear()
+
+            const worksheet = workbook.addWorksheet('Laporan Transaksi')
+
+            worksheet.columns = [
+                { header: 'Tgl Transaksi', key: 'tgl' },
+                { header: 'Partisipan', key: 'nama' },
+                { header: 'Pengeluaran', key: 'pengeluaran' },
+                { header: 'Pemasukan', key: 'pemasukan' }
+            ]
+            
+            this.listProduk.forEach(function(produk){
+                worksheet.addRow({
+                    tgl: produk.tgl, 
+                    nama: produk.nama, 
+                    pengeluaran: produk.pengeluaran, 
+                    pemasukan: produk.pemasukan
+                });
+            })
+
+            const buffer = await workbook.xlsx.writeBuffer()
+            saveAs(new Blob([buffer]), `Tx Warung-Satwa `+df1+` - `+df2+`.xlsx`)
+
+            let st = this.smalltalk
+            setTimeout(function () {
+                st.alert('Download Complete!', 'File berhasil disimpan')
+            }, 1000);
         },
         editProduk: function(produkId){
             this.setModeModal('Edit', produkId)

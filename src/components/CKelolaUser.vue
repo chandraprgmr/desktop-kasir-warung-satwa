@@ -12,18 +12,6 @@
 		<div class="col-md-12">
 			<div class="card">
 				<div class="card-body">
-					<!-- <table class="table table-striped" id="myTable">
-                        <thead>
-                            <tr>
-                              <th>Nama</th>
-                              <th>Username</th>
-                              <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <CKelolaUserRow v-bind:listProduk="listProduk" v-on:konfirmasiHapus="konfirmasiHapus" v-on:editProduk="editProduk" />
-                        </tbody>
-                    </table> -->
           <EasyDataTable
             header-text-direction="center"
             :headers="headers"
@@ -101,15 +89,9 @@
     </div>
 </template>
 <script>
-// import CKelolaUserRow from './CKelolaUserRow.vue'
-// import bcrypt from 'bcryptjs'
-
 export default{
 	name: 'CKelolaUser',
   inject: ['smalltalk'],
-	components : {
-      // CKelolaUserRow,
-  },
   setup() {
       const headers = [
         { text: "Nama", value: "nama", sortable: true  },

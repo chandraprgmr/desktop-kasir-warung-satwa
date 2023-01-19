@@ -1,6 +1,6 @@
 {
   "name": "warung-satwa-kasir-app",
-  "version": "1.20230119.1",
+  "version": "1.20230119.2",
   "private": true,
   "author": "chandprgmr",
   "license": "MIT",
@@ -20,6 +20,8 @@
     "cardinal": "^2.1.1",
     "core-js": "^3.8.3",
     "electron-unhandled": "^4.0.1",
+    "exceljs": "^4.3.0",
+    "file-saver": "^2.0.5",
     "jquery": "^3.6.3",
     "mysql2": "^2.3.3",
     "smalltalk": "^4.1.1",
