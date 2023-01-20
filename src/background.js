@@ -7,7 +7,7 @@ const isDevelopment = process.env.NODE_ENV !== 'production'
 const path = require('path');
 
 import { login, getUser, saveUser, hapusUser } from "./models/userModel.js";
-import { getBarang, saveBarang, searchBarang } from "./models/barangModel.js";
+import { getBarang, saveBarang, searchBarang, hapusBarang } from "./models/barangModel.js";
 import { getSatuan, saveSatuan, hapusSatuan } from "./models/satuanModel.js";
 import { getTransaksi, hapusTransaksi, saveTransaksi, getHutang, saveHutang } from "./models/transaksiModel.js";
 import { getPengeluaran, hapusPengeluaran, savePengeluaran } from "./models/pengeluaranModel.js";
@@ -244,6 +244,24 @@ ipcMain.on("toMain", (event, args) => {
       break;
     case 'saveHutang':
       saveHutang(args, (err, results) => {
+          if (err){
+            win.webContents.send("fromMain", err)
+          }else{
+            win.webContents.send("fromMain", results)
+          }
+      });
+      break;
+    case 'hapusPengeluaran':
+      hapusPengeluaran(args, (err, results) => {
+          if (err){
+            win.webContents.send("fromMain", err)
+          }else{
+            win.webContents.send("fromMain", results)
+          }
+      });
+      break;
+    case 'hapusBarang':
+      hapusBarang(args, (err, results) => {
           if (err){
             win.webContents.send("fromMain", err)
           }else{

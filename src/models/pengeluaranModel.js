@@ -99,3 +99,19 @@ export const savePengeluaran = (data, result) => {
         });
     }   
 }
+
+export const hapusPengeluaran = (data, result) => {
+    db.query(`DELETE FROM pengeluaran
+            WHERE pengeluaran.id = ?
+            `, [data.id], (err, results) => {             
+        if(err) {
+            result(err, null);
+        } else {
+            if(results.affectedRows > 0){
+                result(null, 'OK')
+            }else{
+                result(null, 'NO')
+            }
+        }
+    });  
+}

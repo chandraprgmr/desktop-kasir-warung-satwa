@@ -248,8 +248,8 @@ export default{
                 if(!isReplied){
                     if(result == 'OK'){
                       this.smalltalk.alert('Success!', 'Sukses memperbaharui data')
+                      this.listProduk = []
                       document.getElementById('closeModal').click();
-                      document.getElementById("searchBar").focus();
                     }else if(result == 'NO'){
                       this.smalltalk.alert('Failed!', 'Belum dapat memperbaharui data')
                     }else{

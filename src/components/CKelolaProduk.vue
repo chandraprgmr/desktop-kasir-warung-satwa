@@ -153,11 +153,25 @@ export default{
             this.konfirmasiHapusId = produkId
         },
         hapusProduk: function(){
-            let khi = this.konfirmasiHapusId
-            this.listProduk = this.listProduk.filter(function(item) {
-                return item.id !== khi
-            })
-            document.getElementById('closeHapus').click();
+        let isReplied = false
+        window.api.receive("fromMain", (result) => {
+          console.log(result)
+          if(!isReplied){
+              if(result == 'OK'){
+                  this.smalltalk.alert('Success!', 'Sukses menghapus data')
+                  this.initProduk()
+                  document.getElementById('closeHapus').click();
+              }else if(result == 'NO'){
+                  this.smalltalk.alert('Failed!', 'Belum dapat menghapus data')
+              }else{
+                  this.smalltalk.alert('DB FAIL', result)
+              }
+          }
+          isReplied = true
+        });
+        window.api.send("toMain", 
+          {func: 'hapusBarang', 
+          id: this.konfirmasiHapusId});
         },
         setModeModal: function(mode, produkId){
             this.initSatuan()

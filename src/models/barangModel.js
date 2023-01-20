@@ -98,3 +98,24 @@ export const saveBarang = (data, result) => {
         });
     }   
 }
+
+export const hapusBarang = (data, result) => {
+    let d = new Date();
+
+    let datestring = d.getFullYear()  + "-" + (d.getMonth()+1) + "-" + d.getDate() + " " +
+    d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
+
+    db.query(`UPDATE barang SET barang.deleted_at = ?
+            WHERE barang.id = ?
+            `, [datestring, data.id], (err, results) => {             
+        if(err) {
+            result(err, null);
+        } else {
+            if(results.changedRows > 0){
+                result(null, 'OK')
+            }else{
+                result(null, 'NO')
+            }
+        }
+    });  
+}
