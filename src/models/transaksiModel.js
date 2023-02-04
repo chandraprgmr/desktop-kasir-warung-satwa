@@ -5,15 +5,18 @@ import db from "../configdb.js";
 export const getTransaksi = (data, result) => {
     db.query(`(SELECT transaksi.id, transaksi.pelanggan, SUM((transaksi_detail.harga_jual * transaksi_detail.qty) 
                 - (transaksi_detail.harga_beli * transaksi_detail.qty)) as total, 
-                transaksi.is_hutang, transaksi.created_at, uang_diserahkan, '1' as is_pemasukan, potongan 
+                transaksi.is_hutang, transaksi.created_at, uang_diserahkan, '1' as is_pemasukan, potongan,
+                GROUP_CONCAT(CONCAT(transaksi_detail.qty, " ",satuan.satuan, " - ", barang.nama) SEPARATOR '***') as detail_barang
                 FROM transaksi
                 LEFT JOIN transaksi_detail ON transaksi.id = transaksi_detail.transaksi_id
+                LEFT JOIN barang ON barang.id = transaksi_detail.barang_id
+                LEFT JOIN satuan ON satuan.id = barang.satuan_id
                 WHERE is_hutang = '0'
                 AND (DATE(transaksi.created_at) BETWEEN ? AND ?)
                 GROUP BY transaksi.id)
                 UNION
                 (SELECT pengeluaran.id, nama as pelanggan, total, '0' as is_hutang, tgl_transaksi as created_at,
-                '0' as uang_diserahkan, '0' as is_pemasukan, '0' as potongan 
+                '0' as uang_diserahkan, '0' as is_pemasukan, '0' as potongan, '-' as detail_barang 
                 FROM pengeluaran
                 LEFT JOIN user ON user_id = user.id
                 WHERE (DATE(tgl_transaksi) BETWEEN ? AND ?))

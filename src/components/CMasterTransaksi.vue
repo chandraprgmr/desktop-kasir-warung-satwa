@@ -37,6 +37,14 @@
                             </div>
                         </template>
 
+                        <template #item-detail-barang="{detail_barang}">
+                            <div class="detail-barang-wrapper float-left">
+                                <p class="p-table" v-for="db of detail_barang.split('***')" v-bind:key="db">
+                                    {{db}}
+                                </p>
+                            </div>
+                        </template>
+
                         <template #item-action="{id}">
                             <div class="action-wrapper text-center">
                                 <div class="btn-group">
@@ -171,6 +179,7 @@ export default{
           { text: "Partisipan", value: "nama", sortable: true },
           { text: "Pengeluaran (Rp.)", value: "pengeluaran", sortable: true },
           { text: "Pemasukan (Rp.)", value: "pemasukan", sortable: true },
+          { text: "Keterangan", value: "detail-barang", sortable: false },
           { text: "Action", value: "action"}
         ];
         
@@ -215,12 +224,14 @@ export default{
                                 tgl: df,
                                 nama: item.pelanggan,
                                 pengeluaran: item.is_pemasukan == 0 ? pengeluaran : 0,
-                                pemasukan: item.is_pemasukan == 1 ? pemasukan : 0  
+                                pemasukan: item.is_pemasukan == 1 ? pemasukan : 0,
+                                detail_barang: item.detail_barang
                             })
 
                             totalPemasukan += pemasukan
                             totalPengeluaran += pengeluaran
                         })
+                        console.log(arrayTemp)
                         this.listProduk = arrayTemp
                         this.pemasukan = totalPemasukan
                         this.pengeluaran = totalPengeluaran
@@ -343,7 +354,8 @@ export default{
                                 tgl: df,
                                 nama: item.pelanggan,
                                 pengeluaran: !item.is_pemasukan ? pengeluaran : 0,
-                                pemasukan: item.is_pemasukan ? pemasukan : 0  
+                                pemasukan: item.is_pemasukan ? pemasukan : 0,
+                                detail_barang: item.detail_barang
                             })
 
                             totalPemasukan += pemasukan

@@ -1,8 +1,8 @@
 {
   "name": "warung-satwa-kasir-app",
-  "version": "1.20230120.1",
+  "version": "1.20230204.1",
   "private": true,
-  "author": "chandprgmr",
+  "author": "chandraprgmr",
   "license": "MIT",
   "scripts": {
     "serve": "vue-cli-service serve",

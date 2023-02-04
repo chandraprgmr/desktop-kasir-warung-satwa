@@ -55,3 +55,8 @@ table > thead > tr > th {
 .buttonsToHide{
 	display: none;
 }
+
+/*20230204*/
+.p-table{
+	margin-bottom: 2px !important;
+}
